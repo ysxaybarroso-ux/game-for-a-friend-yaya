@@ -1,0 +1,253 @@
+@font-face {
+    font-family: "04b";
+    src: url("../../fonts/font_pixel.TTF") format("truetype");
+}
+
+@font-face {
+    font-family: "Desp";
+    src: url("../../fonts/description_pixel.ttf") format("truetype");
+}
+
+body
+{
+    background-image: url("../../images/1.webp");
+    margin: 0;
+    overflow: hidden
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+#menuTourelle{
+    position: fixed; 
+    top: 50%;        
+    left: 50%;        
+    width:570px;
+    height:auto;
+    border-radius:10px;
+    background : rgba(0,0,0,0.92);
+    border: 1px solid gold;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    color: white;
+    font-family: '04b';
+    
+    display: none;
+    z-index :15;
+    
+}
+#btnReprendre{
+    background-color: rgba(3, 185, 120, 0.6);
+    border: 2px solid;
+    height:40px;
+    width:150px;
+}
+#sliderMusique{
+    width:100%; 
+    margin-top: 8px;
+}
+#menuPause{
+    display:none;
+        position:fixed; 
+        font-family: '04b';
+        top:50%; left:50%;
+        height : 400px;
+        transform:translate(-50%, -50%);
+        background: rgba(0, 188, 152, 0.85);
+        border: 2px, solid, green;
+        border-radius: 16px;
+        padding: 40px;
+        color: aquamarine;
+        text-align : center;
+        z-index:20;
+        min-width:300px;
+}
+#btnPause{
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    width : 50px;
+    height : 40px;
+    top : 15px;
+    right: 15px;
+    z-index:10;
+    color :azure;
+    font-size: 20px;
+    margin: 14 8px;
+    border: 2px solid;
+    border-color: aqua;
+    border-radius: 10px;
+    background: rgba(3, 185, 176, 0.6);
+}
+canvas {
+    
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent; 
+    z-index: 9;
+    pointer-events: none; /* evite certains bug de click car le canavas peu bloquer les menu pause*/
+}
+
+#tourelleLayout{
+    display: flex;
+    min-height: 380px;
+}
+#tourelleGauche{
+    flex-shrink: 0;
+    width: 160px;
+    border-right: 1px solid rbga(255, 215, 0, 0.3);
+    flex-direction: column;
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0,0,0,0.3);
+}
+#tourelleNom{
+    
+    font-family: '04b';
+    align-items: center;
+    font-size: 15px;
+    margin-top: 100px;
+    color:gold;
+}
+#tourelleNiveau{
+    font-size: 14px;
+    font-family: '04b';
+    color:aqua;
+    margin-top:20px;
+}
+#tourellePreview{
+    border-radius: 50%;
+    border:2px solid rgba(255,215,0,0.3);
+    background: rgba(255,215,0,0.1);
+}
+
+/*droite*/
+#tourelleDroite{
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+}
+#tourelleHeader{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.3);
+    margin-bottom: 12px;
+    padding-bottom:10px;
+}
+#tourelleTitre{
+    font-family: 'Desp';
+    font-size: 16px;
+    color:gold;
+    margin: 0;
+}
+#tourelleXp{
+    color:aqua;
+    font-size: 12px;
+    margin: 0;
+}
+
+/*LIGNE*/
+.upgradeLigne{
+    display:flex;
+    justify-content: center;
+    gap:10px;
+    padding: 0 10px;
+    margin: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.upgradeIcone{
+    align-items: center;
+    justify-content: center;
+    border-radius:8px;
+    display:flex;
+    font-size:18px;
+    height:36px;
+    width:36px;
+    flex-shrink:0;
+    
+}
+.cadenceColor { background: rgba(255, 80, 80, 0.2); }
+.porteeColor  { background: rgba(80, 180, 255, 0.2); }
+.degatsColor  { background: rgba(80, 255, 120, 0.2); }
+
+.upgradeInfo {
+    flex: 1;
+}
+
+.upgradeNom {
+    font-family: '04b';
+    font-size: 13px;
+    color: white;
+    margin: 0;
+}
+
+.upgradeDetail {
+    font-family: 'Desp';
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.upgradeBonus {
+    font-family: 'Desp';
+    font-size: 12px;
+    color: limegreen;
+    margin: 0;
+    min-width: 60px;
+    text-align: right;
+}
+
+.upgradeBtn {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: '04b';
+    background: rgba(255, 215, 0, 0.15);
+    color: gold;
+    border: 1px solid gold;
+    border-radius: 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.upgradeBtn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: grey;
+    color: grey;
+    background: transparent;
+}
+
+#btnFermer {
+    margin-top: auto;
+    padding: 8px;
+    font-size: 13px;
+    font-family: '04b';
+    background: rgba(255, 0, 0, 0.15);
+    color: tomato;
+    border: 1px solid tomato;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.upgradeIcone img { /* snn les images cachent tout*/
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+#tourellePreview { /* pas que le canvas depase hooo*/
+    width: 100px;
+    height: 100px;
+    display: block;
+}

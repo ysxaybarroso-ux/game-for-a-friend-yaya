@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>BON ANNIVERSAIRE BROCHACHO</title>
+        <link rel="stylesheet" href="../css/styles.css" />
+    </head>
+    <body>
+        <button id = 'btnPause'>⏸</button>
+        
+        <div id= 'menuPause'>
+            <h2 style="margin: 0 0 30px;">PAUSE</h2>
+            
+            <button id='btnReprendre' style="font-family: 'Desp'">REPRENDRE</button>
+            
+            <div style="margin-top: 20px; text-align: left;">
+                <label> ==MUSIQUE== <span id='labelMusique'>50%</span></label>
+                <input type= 'range' id= 'sliderMusique' 
+                       min= '0' max='125' value ='50'>
+            </div>
+            <div style="margin-top:20px; text-align:left;">
+                <label> ==SON AMBIENT== <span id='labelSon'>50%</span></label>
+                <input type='range' id='sliderSon'
+                       min='0' max='125' value='50'
+                       style="width:100%; margin-top: 8px;">
+            </div>
+            
+        </div>
+        <div id="menuTourelle">
+            <div id="tourelleLayout">
+                <div id="tourelleGauche">
+                <p id="tourelleNom">CECI EST UNE TRUELLE</p>
+                <p id="tourelleNiveau">NIVEAU 1(nullos)</p>
+                     <canvas id="tourellePreview" height="100" width="100"></canvas>
+                </div>
+                <div id="tourelleDroite">
+                    <div id="tourelleHeader">
+                    <p id="tourelleTitre">UPGRADE</p>
+                    <p id="tourelleXP">XP DISPONIBLE</p>
+                    </div>
+                    
+                    <div class="upgradeLigne">
+                        <div class="upgradeIcone cadenceColor"><img src="../../images/cadence.png"></div>
+                            <div class="upgradeInfo">
+                                <p class="upgradeNom">Cadence</p>
+                                <p class="upgradeDetail" id="upgradeCadence">accelere le rechargement du tir</p>
+                            </div>
+                            <p class="upgradeBonus" id="bonusCadence">-4frames(~0.08sec) entre les tirs</p>
+                            <button class="upgradeBtn" id="btnCadence">100XP</button>
+                    </div>
+                    <div class="upgradeLigne">
+                        <div class="upgradeIcone porteeColor">🎯</div>
+                            <div class="upgradeInfo">
+                                <p class="upgradeNom">Portee</p>
+                                <p class="upgradeDetail" id="upgradePortee">tir jusqu'à 200m</p>
+                            </div>
+                            <p class="upgradeBonus" id="bonusPortee">+30m de portée</p>
+                            <button class="upgradeBtn" id="btnPortee">200XP</button>
+                    </div>
+                    <div class="upgradeLigne">
+                        <div class="upgradeIcone  degatsColor"><img src="../../images/degat.png"></div>
+                            <div class="upgradeInfo">
+                                <p class="upgradeNom">Degats améliorés</p>
+                                <p class="upgradeDetail" id="upgradeDegat">enlève deux hp par tir</p>
+                            </div>
+                            <p class="upgradeBonus" id="bonusDegats">+2 hp en moins par tir</p>
+                            <button class="upgradeBtn" id="btnDegats">300XP</button>
+                    </div>
+                    <button id="btnFermer">✖ fermer</button>
+                    
+                    </div>
+                </div>
+        </div>
+        
+        <canvas id="gamecanvas"></canvas>
+        <script src="../js/script.js"></script>
+    </body>
+</html>
