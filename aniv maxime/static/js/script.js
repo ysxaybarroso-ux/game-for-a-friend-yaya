@@ -1,7 +1,7 @@
 let timer = 0;
 let minute = 0;
 let seconde = 0; //ordre logique de déclaration inversé car chuis différent enft heheheheehehhahahaha --> jdeviens fou #kingerMySheylla
-let niveauDiff =8;
+let niveauDiff =1;
 //tourelle upgrades
 let anglePreview = 0;
 let actualTourelle = null;
@@ -338,15 +338,15 @@ const player = {
         shootRate : 20,
         grenadeRate : 300,
         
-        hp : 500,
-        hpMax : 500,
+        hp : 10,
+        hpMax : 10,
     
         gameOver : false,
     
-        degats: 10,
+        degats: 1,
         ballesSoliditee : 1,
-        bulletSize : 11,
-        ricochetLevel : 14,
+        bulletSize : 10,
+        ricochetLevel :  0,
     
         orbes : 0,
         tourelle : 0,
@@ -647,7 +647,7 @@ function RestartGame(){
     player.ralentiseur = 0;
     player.ralentiseurMax = 0;
 
-    player.tourelle = 1;
+    player.tourelle = 0;
     player.tourelleXp = 0;
 
     player.orbes = 0;
