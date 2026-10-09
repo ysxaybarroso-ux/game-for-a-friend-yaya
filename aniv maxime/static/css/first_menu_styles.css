@@ -1,0 +1,536 @@
+@font-face {
+    font-family: "04b";
+    src: url("../../fonts/font_pixel.TTF") format("truetype");
+}
+
+@font-face {
+    font-family: "Desp";
+    src: url("../../fonts/description_pixel.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "undertale";
+    src: url("../../fonts/Determination.ttf") format("truetype");
+}
+@font-face{
+    font-family: "grav";
+    src: url("../../fonts/grav_f.ttf") format("truetype");
+}
+
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding:0px;
+    margin:0px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-y: hidden;
+    overflow-x:hidden;
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+.bg-video{
+    position:absolute;
+    z-index: -10 ;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top:0;
+    left:0;
+
+}
+h1{
+    display:flex;
+    justify-content: flex-start;
+    margin-left: 40px;
+    margin-bottom: 30px ;
+    font-size: 40px;
+    font-weight: 100;
+    font-family: 'grav';
+    color: green;
+    text-decoration: wavy;
+    text-decoration-line: underline;
+    text-underline-offset: 10px;
+    text-decoration-color: rgb(181, 118, 0);
+}
+
+#home-page-list{
+    list-style: none;
+    margin: 20px;
+}
+
+#start_new_btn{
+    cursor: pointer;
+    font-family: 'grav';
+    font-size: 40px;
+    color:rgb(181, 118, 0);
+    background: transparent;
+    margin-bottom: 30px;
+    margin-left: 16px;
+    height: 95px;
+    backdrop-filter: 2;
+    width:410px;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    border:4px solid rgba(0, 128, 0, 0.418);
+    transition: transform 0.4s;
+}
+
+#start_new_btn:hover{
+    box-shadow: 6px 6px 6px 6px rgba(0, 128, 0, 0.418) ;
+    transform: scale(1.2);
+}
+#select_btn{
+    cursor: pointer;
+    font-family: 'grav';
+    font-size: 40px;
+    color:rgb(181, 118, 0);
+    background: transparent;
+    margin-bottom: 30px;
+    margin-left: 16px;
+    height: 95px;
+    backdrop-filter: 2;
+    width:410px;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    border:4px solid rgba(0, 128, 0, 0.418);
+    transition: transform 0.4s;
+}
+
+#select_btn:hover{
+    box-shadow: 6px 6px 6px 6px rgba(0, 128, 0, 0.418) ;
+    transform: scale(1.2);
+}
+
+
+#settings_btn{
+    cursor: pointer;
+    font-family: 'grav';
+    font-size: 40px;
+    color:rgb(181, 118, 0);
+    background: transparent;
+    margin-bottom: 30px;
+    margin-left: 16px;
+    height: 95px;
+    backdrop-filter: 2;
+    width:410px;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    border:4px solid rgba(0, 128, 0, 0.418);
+    transition: transform 0.4s;
+}
+
+#settings_btn:hover{
+    box-shadow: 6px 6px 6px 6px rgba(0, 128, 0, 0.418) ;
+    transform: scale(1.2);
+}
+
+
+#credit_btn{
+    cursor: pointer;
+    font-family: 'grav';
+    font-size: 40px;
+    color:rgb(181, 118, 0);
+    background: transparent;
+    margin-bottom: 30px;
+    margin-left: 16px;
+    height: 95px;
+    backdrop-filter: 2;
+    width:410px;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    border:4px solid rgba(0, 128, 0, 0.418);
+    transition: transform 0.4s;
+}
+
+#credit_btn:hover{
+    box-shadow: 6px 6px 6px 6px rgba(0, 128, 0, 0.418) ;
+    transform: scale(1.2);
+}
+#start_menu{
+    background-color: rgb(0, 32, 0);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    position: absolute;
+    top:0;
+    left:0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 0px;
+    background-image:  url("../../images/forest-bg.jpg");
+    background-size: cover;
+}
+#run_info{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-family: 'undertale';
+    border: 2px solid rgb(181, 118, 0);
+    border-radius: 16px;
+    background-color: rgb(255, 183, 95);
+    color :rgba(0, 128, 0, 0.418);
+    width :90%;
+    height: 15%;
+}
+#run_title{
+    width: 90%;
+    height: 40%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 16px;
+    border: 3px solid rgb(181, 118, 0);
+
+    font-family:'grav';
+    color:rgb(181, 118, 0);
+    font-size: 90px;
+
+    background-color: rgb(0, 32, 0);
+}
+
+#bottom_select_run{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    gap :20;
+    margin-top: 50px;
+    margin-bottom:  0px;
+
+    font-family: 'undertale';
+    font-size: 30px;
+
+    width:90%;
+    height: 10%;
+    border: 2px solid rgb(181, 118, 0);
+    border-radius: 16px;
+    background-color: rgb(255, 183, 95);
+    color :rgba(0, 128, 0, 0.418);
+}
+#play_run
+{
+    background-image: url("../../images/play.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+    transition: transform 0.2s;
+    border:none;
+    width: 100px;
+    height: 50px;
+}
+#play_run:hover
+{
+    transform: scale(1.2);
+}
+
+#delete_run
+{
+    background-image: url("../../images/trash.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+    transition: transform 0.2s;
+    border:none;
+    width: 75px;
+    height: 60px;
+}
+#delete_run:hover
+{
+    transform: scale(1.2);
+}
+
+#new_menu{
+    position :absolute;
+    top:0px;
+    left:0px;
+    z-index:100;
+
+    background-image: url("../../images/new_run_bg2.jpg");
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat ;
+    background-color: black;
+
+    height:100%;
+    width:100%;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+#new_name
+{
+    border: 10px solid rgb(250, 125, 252);
+    background-color: rgb(220, 200, 156);
+    border-radius: 10px;
+    width :500px;
+    height: 200px;
+    font-size: 50px;
+    font-family: 'grav';
+    color:rgb(72, 192, 213);
+}
+
+#cancel_new{
+    background-image: url("../../images/trash.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+    transition: transform 0.2s;
+    border:none;
+    width: 75px;
+    height: 60px;
+}
+#cancel_new:hover{
+    transform: scale(1.2);
+}
+
+#create_new{
+    background-image: url("../../images/add_run.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+    transition: transform 0.2s;
+    border:none;
+    width: 100px;
+    height: 100px;
+}
+#create_new:hover{
+    transform: scale(1.2);
+}
+
+#select_menu{
+    background-color: rgb(0, 32, 0);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    position: absolute;
+    top:0;
+    left:0;
+    display: none;
+    justify-content: center;
+    margin-bottom: 0px;
+    background-image:  url("../../images/select_menu_bg.jpg");
+    background-size: cover;
+}
+#select_list{
+    width: 20%;
+    height: 90%;
+    border: 4px solid rgb(72, 192, 213);
+    border-radius: 10px;
+    margin-right: 50px;
+}
+#list_level
+{
+    width: 75%;
+    height: 20%;
+    border: solid 4px white;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+#select_info
+{
+    border: solid 4px  rgb(72, 192, 213);
+    border-radius:10px;
+    width : 60%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+#select_play{
+    background-image: url("../../images/play.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+    transition: transform 0.2s;
+    border:none;
+    width: 100px;
+    height: 50px;
+}
+.info{
+    font-family: 'undertale';
+    color: white;
+    font-size:  40px;
+}
+#settings_menu{
+    border: none;
+    background-color: rgb(0, 62, 0);
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    top: 0;
+    left : 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    
+}
+.hearder_option_btn{
+    background-color:transparent;
+    border: none;
+    cursor: pointer;
+}
+#header_menu_settings{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 2px;
+    left :50px;
+    border : solid 6px rgb(181, 118, 0);
+    border-radius: 5px;
+    height:70px;
+    width:90%
+
+}
+#sound_settings{
+    display:flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 90px;
+    border: 4px solid rgb(181, 118, 0);
+    border-radius: 12px;
+    height: 75%;
+    font-family: '04b';
+    font-weight: 100;
+}
+#music_settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 800px;
+    height: 200px;
+    color:rgb(72, 192, 213);
+    font-size:40px;
+}
+#music_slider{
+    cursor: grab;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    width: 100%;
+}
+#music_slider::-webkit-slider-runnable-track{
+    background: linear-gradient(90deg, rgb(72,192,213), rgb(181,118,0));
+    height: 8px;
+    border-radius: 4px;
+}
+#music_slider::-moz-range-track{
+    background: linear-gradient(90deg, rgb(72,192,213), rgb(181,118,0));
+    height: 8px;
+    border-radius: 4px;
+}
+
+#music_slider::-webkit-slider-thumb{
+    -webkit-appearance: none; /* Obligatoire ici aussi */
+    appearance: none;
+    margin-top: -6px; /* Centre le bouton verticalement sur la piste (14px - 8px / 2) */
+    background:#2a9d7b;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 76, 83, 0.466);
+}
+#music_slier::-moz-range-thumb{
+    -webkit-appearance: none; /* Obligatoire ici aussi */
+    appearance: none;
+    margin-top: -6px; /* Centre le bouton verticalement sur la piste (14px - 8px / 2) */
+    background:#2a9d7b;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 76, 83, 0.5);
+}
+
+
+#sound_effects_settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 800px;
+    height: 200px;
+    color:rgb(224, 116, 206);
+    font-size:40px;
+}
+#sound_effect_slider{
+    cursor: grab;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    width: 100%;
+}
+#sound_effect_slider::-webkit-slider-runnable-track{
+    background: linear-gradient(90deg,  rgb(12, 76, 1), rgb(224, 116, 206));
+    height: 8px;
+    border-radius: 4px;
+}
+#sound_effect_slider::-moz-range-track{
+    background: linear-gradient(90deg, rgb(12, 76, 1),rgb(224, 116, 206));
+    height: 8px;
+    border-radius: 4px;
+}
+
+#sound_effect_slider::-webkit-slider-thumb{
+    -webkit-appearance: none; /* Obligatoire ici aussi */
+    appearance: none;
+    margin-top: -6px; /* Centre le bouton verticalement sur la piste (14px - 8px / 2) */
+    background:#007d1b;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 76, 83, 0.466);
+}
+#sound_effect_slider::-moz-range-thumb{
+    -webkit-appearance: none; /* Obligatoire ici aussi */
+    appearance: none;
+    margin-top: -6px; /* Centre le bouton verticalement sur la piste (14px - 8px / 2) */
+    background:#007d1b;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 76, 83, 0.5);
+}
+
+#game_settings{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+    border: 4px solid rgb(181, 118, 0);
+    border-radius: 12px;
+    height: 75%;
+}
+#reset_button{
+    border: 4px solid rgb(184, 0, 0);
+    border-radius:16px;
+    background-color: brown;
+    color:rgb(0, 162, 180) ;
+    font-size: 80px;
+    font-family: '04b';
+    font-weight: 100;
+    transition: transform 0.2s;
+}
+#reset_button:hover{
+    transform: scale(1.2);
+}

@@ -8,11 +8,18 @@
     src: url("../../fonts/description_pixel.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "undertale";
+    src: url("../../fonts/Determination.ttf") format("truetype");
+}
+
 body
 {
     background-image: url("../../images/1.webp");
     margin: 0;
-    overflow: hidden
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 * {
@@ -250,4 +257,32 @@ canvas {
     width: 100px;
     height: 100px;
     display: block;
+}
+.cinematic_box{
+    height: 200px;
+    width: 800px;
+    display: none;
+    position: absolute;
+    top: 70px;
+    border: 6px solid white;
+    background-color: black;
+    color: white;
+    flex-flow:column , wrap;
+}
+.cinematic_image{
+    padding: 35px;
+}
+.pass_btn{
+    font-size: 50px;
+    color : white;
+    font-weight: 900;
+    justify-content: end;
+    align-items: end;
+    display: auto;
+}
+#cinematic_text{
+    color:white;
+    font-family: 'undertale' ;
+    font-size : 30px;
+    padding-left : 50px
 }

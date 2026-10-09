@@ -1,22 +1,77 @@
 let timer = 0;
 let minute = 0;
 let seconde = 0; //ordre logique de déclaration inversé car chuis différent enft heheheheehehhahahaha --> jdeviens fou #kingerMySheylla
-let niveauDiff = 8;
+let niveauDiff =8;
 //tourelle upgrades
 let anglePreview = 0;
 let actualTourelle = null;
-let pTourelleXP = 10000000;
+let pTourelleXP = 0;
 //grenades
-let effetZone = 150; 
-let grenadesMaxTaille = 150;
+let effetZone = 180; 
+let grenadesMaxTaille = 180;
 
 //boss
 let powerCountdown = 0;
 let countdownSecondBoss = 30;
 let spawnBoss1Fait = false;
 let spawnBoss2Fait = false;
-let deathBoss1 = true;
-let deathBoss2 = true ;
+let deathBoss = {1:true , 2:true}
+let boss_dead_cinematic = false
+
+//cinematique
+let isCinematic = false;
+let cinematiqueTextes = [];
+let cinematiqueIndex = 0;
+let cinematiqueItemIndex = 0;
+let dialogue_index = 0;
+let first_cinematic_done = false;
+let size
+let cinematicTimeout = null;
+let personnage
+    //texte
+    let first_cinematic_text = [
+        [
+            ["AGHHHH...", 2100 ],
+            ["Y... You.. got me..",900],
+            ["*this soul is now free*", 1000],
+            ["but p..plea..se", 400],        
+            ["take care of my EMPIRE", 800],
+            ["....", 1100]
+        ],
+        [
+            ["WHAT'S GOING ON HERE!", 500],
+            ["i didn't meant to KILL anyone ! ", 800],
+            ["i... i.. i jus..t just",  600],
+            ["THAT YOU ! you all...", 1000],
+            ["you all try to kill me!!", 600],
+            ["what did i do to y. !", 200]
+        ],
+        [
+            ["nothing...",1000],
+            ["i can't tell you WHY or WHEN and WHO even HOW.. but! ", 700],
+            ["y..you have to promise me!!" ,400]
+        ],
+        [
+            ["PROMISE WHAT ?..."],
+        ],
+        [
+            ["promise me to... to..", 600],
+            ["*fall down*", 300],
+        ],
+        [
+            ["PROMISE WHAT?", 600],
+            ["...", 2000],
+            ["hey man stay with me ... OH please stay with me man!" ,1100]
+        ],
+        [
+            [" just keep fighting...", 2500],
+            ["*he doesn't seem breathing any more*", 600],
+            ["*but you found a book in his coat*", 700],
+            ["*a book full of schema and a map*", 800],
+            ["*it show the location of a mansion... maybe it will be safer....*"]
+        ]
+
+    ]
 
 //les orbess ouaisssss
 let orbesAngle = 0;
@@ -82,6 +137,28 @@ const sonCasino = new Audio('../../sound/casino.wav');
 const sonBoutton1 = new Audio('../../sound/sonBoutton1.mp3');
 const sonError = new Audio('../../sound/error.mp3');
 
+//boss musique
+const introBoss2 = new Audio('../../sound/kylian_dictator.mp3');
+const metalBoss1 = new Audio('../../sound/metal_boss1.mp3');
+const musiqueBoss2 = new Audio('../../sound/boss2musique.mp3');
+
+//cinematic musique 
+const cinematic_text_audio = new Audio("../../sound/text_cinematic.mp3");
+
+const bossMusique = {
+        1 :metalBoss1, 2: musiqueBoss2
+    }
+
+
+let bossIntroFait2 = false;
+
+introBoss2.addEventListener('ended'
+    , ()=> {
+    if (deathBoss[1] &&  gameState != 'Menu')
+    bossMusique[2].loop = true;
+    bossMusique[2].volume = volumeMusique;
+    bossMusique[2].play();
+})
 //pour etre changeable par le joueur
 let volumeMusique = 0.5;
 let volumeSoundEffect = 0.5;
@@ -194,6 +271,41 @@ imgBoss2.src = "../../images/MaxDictadorBoss.png";
 imgBoss2.onload = onImageChargee;
 imgBoss2.onerror = onImageChargee;
 
+const boss2Fond = new Image();
+boss2Fond.src = "../../images/dictator_bg.jpg";
+boss2Fond.onload = onImageChargee;
+boss2Fond.onerror = onImageChargee;
+
+const boss1Fond = new Image();
+boss1Fond.src = "../../images/boss1fond.jpg";
+boss1Fond.onload = onImageChargee;
+boss1Fond.onerror = onImageChargee;
+
+const maxOW = new Image();
+maxOW.src = "../../images/max_ow.png";
+maxOW.onload = onImageChargee;
+maxOW.onerror = onImageChargee;
+
+const maxSki = new Image();
+maxSki.src = "../../images/max_ski.png";
+maxSki.onload = onImageChargee;
+maxSki.onerror = onImageChargee;
+
+const maxKing = new Image();
+maxKing.src = "../../images/max_king.png";
+maxKing.onload = onImageChargee;
+maxKing.onerror = onImageChargee;
+
+const maxLunette = new Image();
+maxLunette.src = "../../images/max_lunette.png";
+maxLunette.onload = onImageChargee;
+maxLunette.onerror = onImageChargee;
+
+const max05 = new Image();
+max05.src = "../../images/max_0x5.png";
+max05.onload = onImageChargee;
+max05.onerror = onImageChargee;
+
 //===========================enfin finis rolalalal jai peur que ça ralentise la page hiiii kinger prie pour moi bro =================================
 
 const pBullets = [];
@@ -224,20 +336,20 @@ const player = {
         grenadeCountdown : 0,
     
         shootRate : 20,
-        grenadeRate : 350,
+        grenadeRate : 300,
         
-        hp : 10,
-        hpMax : 10,
+        hp : 500,
+        hpMax : 500,
     
         gameOver : false,
     
-        degats: 1,
+        degats: 10,
         ballesSoliditee : 1,
         bulletSize : 11,
-        ricochetLevel : 0,
+        ricochetLevel : 14,
     
-        orbes : 2,
-        tourelle : 1,
+        orbes : 0,
+        tourelle : 0,
     
         ralentiseur : 0,
         ralentiseurMax : 0,
@@ -397,6 +509,10 @@ document.getElementById('sliderMusique').addEventListener('input', function() {
     volumeMusique = this.value / 100;
     musiqueJeu.volume = volumeMusique;
     musiqueMenu.volume = volumeMusique;
+    for (let m in bossMusique){
+            bossMusique[m].volume = volumeMusique;
+        
+        }
     
     document.getElementById('labelMusique').textContent = this.value + '%';
 });
@@ -542,10 +658,29 @@ function RestartGame(){
     enemis.length = 0;
     player.niveau = 1;
     player.degats = 1;
+    player.rotSpeed = 0.075;
+    player.grenadeRate = 300
+    player.xpRequis = 100
+    upgradeEnCours = false
+    isCinematic = false
+    dialogue_index = 0 
+    first_cinematic_done = false
+    cinematiqueTextes = []
     timer = 0;
     seconde = 0;
     minute = 0;
     niveauDiff = 1;
+
+    powerCountdown = 0;
+    countdownSecondBoss = 30;
+    spawnBoss1Fait = false;
+    spawnBoss2Fait = false;
+    deathBoss[1] = true;
+    deathBoss[2] = true ;
+    for (let m in bossMusique){
+        bossMusique[m].pause()
+        bossMusique[m].currentTime = 0;
+    }
     
     
 }
@@ -585,11 +720,23 @@ function CalculateColision(killer,killed, killerSize){
                             killer[i].soliditee-- ;
                             
                             if (killed[j].hp <= 0){
+                                if (killed[j].diff != undefined) {
+                                    deathBoss[killed[j].diff] = true;
+                                    if (niveauDiff >=7){
+                                        bossMusique[killed[j].diff].pause();
+                                        cinematic_text_audio.volume = volumeMusique;
+                                        cinematic_text_audio.loop = true ;
+                                        cinematic_text_audio.play();
+                                        LaunchTextCinematic(first_cinematic_text[0] , "MaxDictadorBoss.png" ,125,125);
+                                    }
+                                    else{
+                                        bossMusique[killed[j].diff].pause();
+                                        changerMusique('Jeu');
+                                    }
+                                }
                                 killed.splice(j,1); //meurt si 0 vies (LOSERRRR)
                                 if (killer[i].ToJ ===0) player.xp +=10 + startHP * 10;
                                 if (killer[i].ToJ === 1) pTourelleXP += 20 + startHP *20;
-                                if (killer[i].deathTracker === 1) deathBoss1 = true
-                                if (killer[i].deathTracker === 2) deathBoss2  = true
                             }
                             
                             if (killer[i] && killer[i].soliditee <= 0){ // vérifie que la balle existe encore
@@ -629,12 +776,15 @@ function tourelleFermerMenu(){
 function Boss_second_Spawner(){
     if(!spawnBoss2Fait){
         spawnBoss2Fait = true;
-        const hp = 100;
-        const bossSize =  hp * 1;
+        const hp = 150;
+        const bossSize =  hp * 1 - 50;
         const x = canvas.width/ 2;
         const y = 0;
-        deathBoss2 = false;
-        boss.push({x, y, hp, size: bossSize, speed: 1, hpMax: hp, speedBase :1, invincibleCountdown: 5, diff:2, angle:0 , deathTracker: 1
+        musiqueJeu.pause()
+        introBoss2.volume = volumeMusique;
+        introBoss2.play();
+        deathBoss[2] = false;
+        boss.push({x, y, hp, size: bossSize, speed: 0.9, hpMax: hp, speedBase :0.9, invincibleCountdown: 5, diff:2, angle:0 ,
         });
     }
 }
@@ -673,13 +823,18 @@ function Update_second_Boss(){
 
 function Boss_first_Spawner(){
     if(!spawnBoss1Fait){
+
         spawnBoss1Fait = true;
-        const hp = 50;
-        const bossSize = 15 + hp * 1.6;
+        const hp = 65;
+        const bossSize =  hp * 1.6;
         const x = canvas.width/ 2;
         const y = 0;
-        deathBoss1 = false;
-        boss.push({x, y, hp, size: bossSize, speed: 1.2, hpMax: hp, speedBase :1.2, invincibleCountdown: 5, diff: 1, deathTracker: 1});
+        deathBoss[1] = false;
+        boss.push({x, y, hp, size: bossSize, speed: 1, hpMax: hp, speedBase :1, invincibleCountdown: 5, diff: 1});
+         bossMusique[1].volume = volumeMusique;
+        bossMusique[1].loop = true;
+        musiqueJeu.pause();
+        bossMusique[1].play()
     }
     
 }
@@ -741,8 +896,8 @@ function Update_first_Boss(){
         }
 }
 function EnemisSpawner(){
-    const spawnRate = niveauDiff >= 8 ? 120 : Math.max(30, 120 - niveauDiff * 11);
-    
+    const spawnRate = niveauDiff >= 8 ? 120 : Math.max(25, 110 - niveauDiff * 11);
+     
     if (spawnCountdown > 0){
         spawnCountdown--;
         return;
@@ -888,6 +1043,15 @@ function MoveBullets(Bullets){
             Bullets[i].vy *= -1;
             Bullets[i].rebonds--;
         }
+        if (
+            Bullets[i].rebonds <= 0 &&
+            (Bullets[i].x < -50 ||
+             Bullets[i].x > canvas.width + 50 ||
+             Bullets[i].y < -50 ||
+             Bullets[i].y > canvas.height + 50)
+        ){
+            Bullets.splice(i, 1);
+        }
     }
 }
 function MoveGrenades(){
@@ -903,26 +1067,50 @@ function MoveGrenades(){
         if (g.z <= 0){
             g.z = 0;
             GrenadeExplode(i);
+            continue;
         }
     }
 }
 
 function GrenadeExplode(i){
+    const g = pGrenades[i]
+
     const s = sonGrenade.cloneNode();
     s.volume = volumeSoundEffect;
     s.play();
-    const grenadeTemp = [pGrenades[i]];
-    CalculateColision(grenadeTemp,enemis,effetZone); //effet zone car dif entre taille objet et explosion parfois
-    CalculateColision(grenadeTemp,boss,effetZone);
-    explosion.push({ //anim 
-        x : pGrenades[i].x,
-        y : pGrenades[i].y,
-        taille : 70,
-        tailleMax : grenadesMaxTaille,
-        timer : 0,
-        duree : 20,
+
+    for (let j = enemis.length - 1; j >= 0; j--) {
+        if (CalculateDistance(g, enemis[j]) < effetZone + enemis[j].size) {
+            const startHP = enemis[j].hp;
+
+            enemis[j].hp -= player.degats * 3;
+
+            if (enemis[j].hp <= 0) {
+                enemis.splice(j, 1);
+                player.xp += 10 + startHP * 10;
+            }
+        }
+    }
+
+    for (let j = boss.length - 1; j >= 0; j--) {
+        if (
+            CalculateDistance(g, boss[j]) <
+            effetZone + boss[j].size
+        ) {
+            boss[j].hp -= player.degats * 3;
+        }
+    }
+
+    explosion.push({
+        x: g.x,
+        y: g.y,
+        taille: 70,
+        tailleMax: grenadesMaxTaille,
+        timer: 0,
+        duree: 20
     });
-    pGrenades.splice(i,1);
+
+    pGrenades.splice(i, 1);
 }
 function UpdateExplosion(){
     for (let i = explosion.length - 1; i>= 0; i--){
@@ -971,7 +1159,6 @@ function CollisionEnemis(){
     for (let i = enemis.length -1; i >= 0; i--)
         {
             const dist = CalculateDistance(player,enemis[i]);
-            console.log(dist);
             if (dist < enemis[i].size + (player.size ) && player.invincibleCountdown <= 0){ 
                 player.hp--;
                 player.invincibleCountdown = 50;
@@ -1329,7 +1516,102 @@ function DrawHUD(){
     ctx.fillStyle = 'aqua';
     ctx.fillRect(0, canvas.height - 20, xpBarSize, 20);
 }
+
+
+function LaunchTextCinematic(texte , personage, persoSizeX , persoSizeY){ //make the game stop in the loop and prepare the text anim
+
+    //old timer capout 
+    if (cinematicTimeout !== null) {
+        clearTimeout(cinematicTimeout);
+        cinematicTimeout = null;
+    }
+    isCinematic = true;
+    cinematiqueTextes = texte;
+    bossMusique[2].pause()
+    cinematiqueIndex = 0
+
+    document.querySelector(".cinematic_box").style.display = "flex";
+    document.querySelector(".cinematic_box").style.zIndex = "1000";
+    document.querySelector("#cinematic_box_image").innerHTML = '<img src="../../images/' + personage+'" width="'+ persoSizeX+ '" height="'+ persoSizeY+'" class="cinematic_image"></img>';
+    document.querySelector("#cinematic_text").innerHTML = "";
+
+    TextCinematic();
+}
+function TextCinematic(){ //make the caracter by caracter anim  i choose an charater by character anim + control the wait between word
+    const textDiv = document.querySelector("#cinematic_text");
+
+    if (!cinematiqueTextes || cinematiqueIndex >= cinematiqueTextes.length) {
+        ChangeSpeakerPerson();
+        return;
+    }
+    let actualPhrase = cinematiqueTextes[cinematiqueIndex];
+
+    let word = actualPhrase[0];
+    let delayAfterWord = actualPhrase[1];
+
+    let letterIndex = 0; // char by char 
+
     
+    function WriteWord(){
+
+        if (!isCinematic) return;
+
+
+        if (letterIndex < word.length){
+            textDiv.innerHTML += word[letterIndex];
+            letterIndex++;
+
+            cinematicTimeout = setTimeout(WriteWord, 80); //char speed
+            
+        }
+        else {
+            textDiv.innerHTML += " ";
+
+            cinematiqueIndex++;
+
+            cinematicTimeout = setTimeout(() => {
+                textDiv.innerHTML = " ";
+
+                if (cinematiqueIndex >= cinematiqueTextes.length) {
+                    ChangeSpeakerPerson();
+                }
+                else {
+                    TextCinematic();
+                }
+            }, delayAfterWord);
+        }
+    }
+    WriteWord();
+}
+
+function ChangeSpeakerPerson(){ /// change the speaker of the anim
+
+    if (cinematicTimeout !== null) { // old timer capout
+        clearTimeout(cinematicTimeout);
+        cinematicTimeout = null;
+    }
+
+    dialogue_index++;
+    if (dialogue_index >= first_cinematic_text.length)
+    {
+        first_cinematic_done = true; 
+        isCinematic = false;
+        cinematic_text_audio.pause();
+        document.querySelector(".cinematic_box").style.display = "none"
+        window.location.href = "../html/first_menu.html";
+        return;
+    }
+    if (dialogue_index % 2 != 0){ //handle the image of the caracter in the cinematic
+        personage ="max_0x5.png" ;
+        size = 125;
+    }
+    else {
+        personage = "MaxDictadorBoss.png";
+        size = 125;
+    }
+    LaunchTextCinematic(first_cinematic_text[dialogue_index],personage ,size, size);
+    
+}
 function LevelUp(){
     player.xp -= xpRequis(player.niveau);
     player.niveau++;
@@ -1459,6 +1741,15 @@ function TirerUpgrade(){
     return selection;
 }
 
+function DrawGame() {
+    DrawRalentiseur(); // ici l'ordre est super important pour les superpotion des élément genre pas que le ralentiseur recouvre les enemis
+    DrawExplosion();
+    DrawTourelle();
+    Orbes();
+    DrawEnemis();
+    DrawPlayer();
+    DrawGrenade();
+}
 function GameLoop(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
     
@@ -1480,6 +1771,10 @@ function GameLoop(){
         requestAnimationFrame(GameLoop);
         return;
     }
+    if (isCinematic){
+        requestAnimationFrame(GameLoop);
+        return;
+    }
     if (upgradeEnCours){
         
         CasinoUpdate();
@@ -1487,7 +1782,7 @@ function GameLoop(){
         requestAnimationFrame(GameLoop);
         return;
     }
-    if (niveauDiff === 4 || !deathBoss1) {
+    if (niveauDiff === 4 || !deathBoss[1]) {
         // code boss uniquement ici
         Collision_first_Boss();
         BossEnemisSpawner();
@@ -1495,41 +1790,32 @@ function GameLoop(){
         Update_first_Boss();
         DrawBoss();
     }
-    if (niveauDiff === 8 || !deathBoss2){
+    if (niveauDiff === 8 || !deathBoss[2]){
         
             Collision_first_Boss();
             BossEnemisSpawner();
             Boss_second_Spawner();
             Update_second_Boss();
             DrawBoss();
+           
     }
-    
+    if (niveauDiff === 4 || !deathBoss[1]) document.getElementById("body").style.backgroundImage = 'url("../../images/boss1fond.jpg")';
+    else if (niveauDiff === 8 || !deathBoss[2])  document.getElementById("body").style.backgroundImage = 'url("../../images/dictator_bg.jpg")';
+    else {document.getElementById("body").style.backgroundImage = 'url("../../images/1.webp")';}
+
     UpdatePlayer();
-    
     MoveGrenades();
-    
     UpdateExplosion();
-    
+    EnemisUpdate();
     UpdateTourelle();
-    
+    Orbes();
     CollisionEnemis();
     CollisionBullet();
     collisionRalentiseur();
-    
     EnemisSpawner();
-    EnemisUpdate();
-    
-    
-    DrawRalentiseur(); // ici l'ordre est super important pour les superpotion des élément genre pas que le ralentiseur recouvre les enemis
-    DrawExplosion();
-    DrawTourelle();
-    Orbes();
-    DrawPlayer();
-    DrawEnemis();
-        
-    
-    DrawGrenade();
-        
+
+    DrawGame();
+
     //orbes
     orbesAngle += 0.015;
     if (player.xp >= xpRequis(player.niveau)) {

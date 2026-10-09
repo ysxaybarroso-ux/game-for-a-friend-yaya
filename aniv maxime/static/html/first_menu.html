@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>menu de maxime <3 </title>
+        <link rel="stylesheet" href="../css/first_menu_styles.css" />
+    </head>
+    <body id="body">
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="../../videos/max_first_fond.mp4" type="video/mp4">
+        </video>
+        <h1>MAXIME ADVENTURE</h1>
+        <ul id="home-page-list">
+            <li><button id="start_new_btn">new game</button></li>
+            <li><button id="select_btn">select level</button></li>
+            <li><button id="settings_btn">settings</button></li>
+            <li><button id="credit_btn">credit</button></li>
+        </ul>
+        <div id="start_menu">
+            <div id="run_info">
+                <div id="run_level"></div>
+                <div id="run_state"></div>
+            </div>
+            <div id="run_title">your run</div>
+            <div id="bottom_select_run">
+                 <div id="save_info"> saved last time : 02/02/2020</div>
+                <button id="play_run"></button>
+                <button id="delete_run"></button>
+            </div>
+        </div>
+
+        <div id="new_menu">
+            <div id="new_info">
+                <input id="new_name" placeholder="world_name" type="text">
+            </div>
+            <div id="new_bottom">
+                <button id="cancel_new"></button>
+                <button id="create_new"></button>
+            </div>
+        </div>
+        <div id="select_menu">
+            <div id="select_list">
+                <div id="list_level">
+
+                </div>
+            </div>
+            <div id="select_info">
+                <div id="select_title" class="info"></div>
+                <div id="select_level" class="info"></div>
+                <div id="select_state" class="info"></div>
+                <button id="select_play" class="info"></button>
+            </div>
+        </div>
+
+        <div id="settings_menu">
+            <div id="header_menu_settings">
+                <button id="sound_settings_btn" class="hearder_option_btn"><img src="../../images/sound_btn.png " width = "50" height="50" alt="setting sound btn"></button>
+                <button id="game_settings_btn" class="hearder_option_btn"><img src="../../images/game_btn.png" width="50" height="50" alt="game btn "></button>
+            </div>
+
+            <div id="sound_settings">
+                <div id="music_settings">
+                    <label> ==MUSIC VOLUME== <span id='labelMusique'>50%</span></label>
+                    <input id="music_slider" type="range" value="0" max="100">
+                </div>
+                <div id="sound_effects_settings">
+                    <label> ==SOUND EFFECT== <span id='labelSon'>50%</span></label>
+                    <input id="sound_effect_slider" type="range" value="0" max="100" >
+                </div>
+            </div>
+
+            <div id="game_settings">
+                <button id="reset_button">RESET GAME</button>
+            </div>
+            
+
+        </div>
+
+        <div id="credit_menu">
+            <video><!--thank video will come here--></video>
+        </div>
+
+    <script src="../js/first_menu_script.js"></script>
+    </body>
+</html>
